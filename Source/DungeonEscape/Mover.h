@@ -33,6 +33,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool ShouldMove = false;	// indicates whether or not object should move or not
 
+	UPROPERTY(VisibleAnywhere)
+	bool ReachedTarget = false;
+
 	FVector TargetLocation;
 	FVector StartLocation;
 		

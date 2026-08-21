@@ -22,7 +22,7 @@ void UMover::BeginPlay()
 	
 	StartLocation = GetOwner()->GetActorLocation();
 
-	TargetLocation = StartLocation + MoveOffset;
+	//TargetLocation = StartLocation + MoveOffset;
 	
 	
 }
@@ -33,11 +33,22 @@ void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponent
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	if (ShouldMove) {
+		// TargetLocation is start location + move offset
+		TargetLocation = StartLocation + MoveOffset;
+	}
+	else {
+		// target location is start location
+		TargetLocation = StartLocation;
+	}
+
+	FVector CurrentLocation = GetOwner()->GetActorLocation();
+	ReachedTarget = CurrentLocation.Equals(TargetLocation);
+	if (!ReachedTarget) {
 		// Make door move up
-		FVector CurrentLocation = GetOwner()->GetActorLocation();
+		//FVector CurrentLocation = GetOwner()->GetActorLocation();
 
 		float Speed = MoveOffset.Length() / MoveTime;
-		
+
 		FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, DeltaTime, Speed);
 
 		GetOwner()->SetActorLocation(NewLocation);
