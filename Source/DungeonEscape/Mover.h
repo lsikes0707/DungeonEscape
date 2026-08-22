@@ -30,13 +30,17 @@ public:
 	UPROPERTY(EditAnywhere)
 	float MoveTime = 4.0f;	// how long it takes to reach the target location
 
-	UPROPERTY(EditAnywhere)
-	bool ShouldMove = false;	// indicates whether or not object should move or not
-
 	UPROPERTY(VisibleAnywhere)
 	bool ReachedTarget = false;
 
 	FVector TargetLocation;
 	FVector StartLocation;
+
+	bool GetShouldMove();
+	void SetShouldMove(bool NewShouldMove);
+
+private:
+	UPROPERTY(VisibleAnywhere)
+	bool ShouldMove = false;	// indicates whether or not object should move or not
 		
 };
